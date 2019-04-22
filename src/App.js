@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Contact from "./components/Contact";
 
 //Main app component
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>The App Container</h1>
+        <Contact />
       </div>
     );
   }
