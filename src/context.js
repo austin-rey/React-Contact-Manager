@@ -7,11 +7,17 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "DELETE_CONTACT":
       return {
-        //This is a rest operator, we only want to change contacts in our state
+        //This is a spread operator, we only want to change contacts in our state
         ...state,
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
         )
+      };
+    case "ADD_CONTACT":
+      return {
+        //This is a spread operator, we only want to change contacts in our state
+        ...state,
+        contacts: [action.payload, ...state.contacts]
       };
     default:
       return state;
@@ -41,6 +47,8 @@ export class Provider extends Component {
     ],
     dispatch: action => {
       this.setState(state => reducer(state, action));
+      console.log("Dispatch Action:", action.type);
+      console.log("Contact ID:", action.payload.id);
     }
   };
   render() {
