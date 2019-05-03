@@ -60,8 +60,8 @@ class AddContact extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="card mb-3 mx-auto">
-              <div className="card-header">Add Contact</div>
+            <div className="card mb-3 px-0 container">
+              <div className="card-header Display-4">Add Contact</div>
               <div className="card-body">
                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                   <TextInputGroup
