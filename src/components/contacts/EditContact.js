@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Consumer } from '../../context';
-import TextInputGroup from '../layout/TextInputGroup';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Consumer } from "../../context";
+import TextInputGroup from "../layout/TextInputGroup";
+import axios from "axios";
 
 class EditContact extends Component {
   state = {
-    name: '',
-    email: '',
-    phone: '',
+    name: "",
+    email: "",
+    phone: "",
     errors: {}
   };
   //Need to catch if user is not found
@@ -29,28 +29,43 @@ class EditContact extends Component {
     const { name, email, phone } = this.state;
 
     //Check for errors
-    if (name === '') {
-      this.setState({ errors: { name: 'Name is required' } });
+    if (name === "") {
+      this.setState({ errors: { name: "Name is required" } });
       return;
     }
-    if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
+    if (email === "") {
+      this.setState({ errors: { email: "Email is required" } });
       return;
     }
-    if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
+    if (phone === "") {
+      this.setState({ errors: { phone: "Phone is required" } });
       return;
     }
+
+    const updContact = {
+      name,
+      email,
+      phone
+    };
+
+    const { id } = this.props.match.params;
+
+    const res = await axios.put(
+      `https://jsonplaceholder.typicode.com/users/${id}`,
+      updContact
+    );
+
+    dispatch({ type: "UPDATE_CONTACT", payload: res.data });
 
     //Clear State
     this.setState({
-      name: '',
-      email: '',
-      phone: '',
+      name: "",
+      email: "",
+      phone: "",
       errors: {}
     });
 
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
