@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const Header = props => {
   const { branding } = props;
@@ -34,12 +34,10 @@ const Header = props => {
   );
 };
 
-//Default property
 Header.defaultProps = {
-  branding: 'My App'
+  branding: "My App"
 };
 
-//Validate properties
 Header.propTypes = {
   branding: PropTypes.string.isRequired
 };
