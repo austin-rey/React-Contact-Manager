@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Contact from './Contact';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GET_CONTACTS } from '../../actions/types';
+import { getContacts } from '../../actions/contactActions';
 
 class Contacts extends Component {
   //We want to connect to store and get contacts when component mounts
@@ -34,13 +34,14 @@ const mapStateToProps = state => ({
   contacts: state.contact.contacts
 });
 
-//Mapping dipatch action to a local prop
-const mapDispatchToProps = dispatch => ({
-  getContacts: () => dispatch({ type: GET_CONTACTS })
-});
+//Mapping dipatch action to a local prop 
+//Moved this to contactActions
+// const mapDispatchToProps = dispatch => ({
+//   getContacts: () => dispatch({ type: GET_CONTACTS })
+// });
 
 // params include what ever we want to include from the redux state and what we need to dispatch (action)
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  getContacts
 )(Contacts);
