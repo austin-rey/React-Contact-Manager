@@ -1,32 +1,17 @@
-import React, { Component } from "react";
-import Contact from "./Contact";
+import React, { Component } from 'react';
+import Contact from './Contact';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { GET_CONTACTS } from '../../actions/types';
 
 class Contacts extends Component {
-  state = {
-    contacts: [
-      {
-        id: 1,
-        name: "John Doe",
-        email: "john@gmail.com",
-        phone: "555-555-5555"
-      },
-      {
-        id: 2,
-        name: "Karen Williams",
-        email: "karen@gmail.com",
-        phone: "444-444-4444"
-      },
-      {
-        id: 3,
-        name: "Henry Johnson",
-        email: "henry@gmail.com",
-        phone: "333-333-333"
-      }
-    ]
-  };
+  //We want to connect to store and get contacts when component mounts
+  componentDidMount() {
+    this.props.getContacts();
+  }
 
   render() {
-    const { contacts } = this.state;
+    const { contacts } = this.props;
     return (
       <React.Fragment>
         <h1 className="display-4 mb-2">
@@ -40,4 +25,22 @@ class Contacts extends Component {
   }
 }
 
-export default Contacts;
+Contacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  getContacts: PropTypes.func.isRequired
+};
+//Mapping state from redux to a local prop
+const mapStateToProps = state => ({
+  contacts: state.contact.contacts
+});
+
+//Mapping dipatch action to a local prop
+const mapDispatchToProps = dispatch => ({
+  getContacts: () => dispatch({ type: GET_CONTACTS })
+});
+
+// params include what ever we want to include from the redux state and what we need to dispatch (action)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Contacts);
