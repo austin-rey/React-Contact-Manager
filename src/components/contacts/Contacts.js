@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
   contacts: state.contact.contacts
 });
 
-//Mapping dipatch action to a local prop 
+//Mapping dipatch action to a local prop
 //Moved this to contactActions
 // const mapDispatchToProps = dispatch => ({
 //   getContacts: () => dispatch({ type: GET_CONTACTS })
@@ -43,5 +43,5 @@ const mapStateToProps = state => ({
 // params include what ever we want to include from the redux state and what we need to dispatch (action)
 export default connect(
   mapStateToProps,
-  getContacts
+  { getContacts }
 )(Contacts);

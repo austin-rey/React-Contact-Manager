@@ -1,11 +1,15 @@
-import React, { Component } from "react";
-import TextInputGroup from "../layout/TextInputGroup";
+import React, { Component } from 'react';
+import TextInputGroup from '../layout/TextInputGroup';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addContact } from '../../actions/contactActions';
+import uuid from "uuid"
 
 class AddContact extends Component {
   state = {
-    name: "",
-    email: "",
-    phone: "",
+    name: '',
+    email: '',
+    phone: '',
     errors: {}
   };
 
@@ -15,38 +19,40 @@ class AddContact extends Component {
     const { name, email, phone } = this.state;
 
     // Check For Errors
-    if (name === "") {
-      this.setState({ errors: { name: "Name is required" } });
+    if (name === '') {
+      this.setState({ errors: { name: 'Name is required' } });
       return;
     }
 
-    if (email === "") {
-      this.setState({ errors: { email: "Email is required" } });
+    if (email === '') {
+      this.setState({ errors: { email: 'Email is required' } });
       return;
     }
 
-    if (phone === "") {
-      this.setState({ errors: { phone: "Phone is required" } });
+    if (phone === '') {
+      this.setState({ errors: { phone: 'Phone is required' } });
       return;
     }
 
     const newContact = {
+      id: uuid(),
       name,
       email,
       phone
     };
 
     //// SUBMIT CONTACT ////
+    this.props.addContact(newContact);
 
     // Clear State
     this.setState({
-      name: "",
-      email: "",
-      phone: "",
+      name: '',
+      email: '',
+      phone: '',
       errors: {}
     });
 
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -95,5 +101,11 @@ class AddContact extends Component {
     );
   }
 }
-
-export default AddContact;
+AddContact.propTypes = {
+  addContact: PropTypes.func.isRequired
+}
+//Not bringing any data in
+export default connect(
+  null,
+  { addContact }
+)(AddContact);
