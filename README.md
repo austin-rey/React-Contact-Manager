@@ -4,9 +4,9 @@
 
 This is a simple project based off a React course I completed which allows users to manage contacts.
 
-#### Some of the concepts & technolgoies I learned through this courses:
+#### Some of the concepts & technologies I learned through this courses:
 
-- Implimenting a Redux store
+- Implementing a Redux store
 - Connecting components to application level state via action creators
 - Modifying application level state via reducers
 - Using the Context API to manage application level state (Was replaced with Redux)
