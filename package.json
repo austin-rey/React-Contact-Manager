@@ -2,7 +2,7 @@
   "name": "contactmanager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://austin-rey.github.io/React-Contact-Manager",
+  "homepage": "https://austin-rey.github.io/react-contact-manager/",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
